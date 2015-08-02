@@ -29,15 +29,21 @@ main.js
 How to use PageSpeed Insights
 ----------------------------------
 1. Run a local server
+
 $> cd /path/to/your-project-folder
+
 $> python -m SimpleHTTPServer 8080
+
 Open a browser and visit localhost:8080
 
 2. Use ngrok too make your local server accessible remotely.
 
 In a new command prompt window:
+
 $> cd /path/to/your-project-folder
+
 $> ngrok http 8080
   
 3. Use PageSpeed Insights
+4. 
 Copy the public URL ngrok gives you and try running it through PageSpeed Insights (https://developers.google.com/speed/pagespeed/insights)
