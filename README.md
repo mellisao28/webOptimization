@@ -7,22 +7,23 @@ Click on index.html or visit my GitHub page (https://rawgit.com/mellisao28/webOp
 Changes to original version
 ----------------------------------
 index.html
-- only load print.css when media="print"
-- Inline and minified CSS
-- Use async for javascript
+- only loaded print.css when media="print"
+- Inlined and minified CSS
+- Used async for javascript
 - Compressed images
 
 
 pizza.html
-- Add viewport tag in header
-- Inline and minified CSS
-- Use various image sizes 
+- Added viewport tag in header
+- Inlined and minified CSS
+- Used various image sizes 
 - Minified javascript and use async
 
 main.js
-- change changePizzaSizes to only loop the part to update width
-- change looping for pizza generator to get the first 2 pizzas outside of the loop
-- change updatePosition to use cachedScroll and phaseCount
+- changed changePizzaSizes to only loop the part to update width
+- changed looping for pizza generator to get the first 2 pizzas outside of the loop
+- changed updatePosition to use cachedScroll and phaseCount
+- changed the number of sliding pizzas to 35
 
 How to use PageSpeed Insights
 ----------------------------------
