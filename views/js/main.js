@@ -464,11 +464,13 @@ var resizePizzas = function(size) {
         return dx;
     }
 
-    // Iterates through pizza elements on the page and changes their widths
+
     function changePizzaSizes(size) {
+        //used getElementsByClassName instead of querySelectorAll
         var pizzaContainer = document.getElementsByClassName("randomPizzaContainer"); //retrieve number of pizza
         var dx = determineDx(pizzaContainer[0], size); //get size different for 1 pizza
         var newwidth = (pizzaContainer[0].offsetWidth + dx) + 'px'; //set new size
+        // Iterates through pizza elements on the page and changes their widths
         for (var i = 0; i < pizzaContainer.length; i++) {
             pizzaContainer[i].style.width = newwidth;
         }
@@ -518,27 +520,28 @@ function logAverageFrame(times) { // times is the array of User Timing measureme
 function updatePositions() {
     frame++;
     window.performance.mark("mark_start_frame");
-
-    var items = document.getElementsByClassName('mover');
-
+    var items = document.getElementsByClassName('mover'); //used getElementsByClassName instead of querySelectorAll
     var cachedScroll = document.body.scrollTop / 1250; // cached the updated scroll position
-    var phaseCount = 0; // counter from 0-4
-    for (var i = 0; i < items.length; i++) {
-        var phase = Math.sin(cachedScroll + phaseCount);
-        items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-        phaseCount++;
-        if (phaseCount > 4)
-            phaseCount = 0;
+    var phase = [];
+    // calculate 5 phases
+    for (var i = 0; i < 5; i++) {
+        phase.push(Math.sin(cachedScroll + i) * 100);
     }
 
-    // User Timing API to the rescue again. Seriously, it's worth learning.
-    // Super easy to create custom metrics.
-    window.performance.mark("mark_end_frame");
-    window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
-    if (frame % 10 === 0) {
-        var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
-        logAverageFrame(timesToUpdatePosition);
+    // assign phase to item
+    for (var i = 0, max = items.length; i < max; i++) {
+        items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
     }
+}
+
+// User Timing API to the rescue again. Seriously, it's worth learning.
+// Super easy to create custom metrics.
+window.performance.mark("mark_end_frame");
+window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
+if (frame % 10 === 0) {
+    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
+    logAverageFrame(timesToUpdatePosition);
+}
 }
 
 // runs updatePositions on scroll
@@ -548,12 +551,15 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
     var cols = 8;
     var s = 256;
-    for (var i = 0; i < 35; i++) {
+    var pizzaHeight = 100, // sliding pizza height
+        pizzaWidth = 73.33; // sliding pizza width
+    var numOfMovingPizzas = (self.innerHeight * self.innerWidth) / (pizzaHeight * pizzaWidth); //calculate number of moving pizzas
+    for (var i = 0; i < numOfMovingPizzas; i++) {
         var elem = document.createElement('img');
         elem.className = 'mover';
         elem.src = "images/pizza.png";
-        elem.style.height = "100px";
-        elem.style.width = "73.333px";
+        elem.style.height = pizzaHeight + "px";
+        elem.style.width = pizzaWidth + "px";
         elem.basicLeft = (i % cols) * s;
         elem.style.top = (Math.floor(i / cols) * s) + 'px';
         document.querySelector("#movingPizzas1").appendChild(elem);

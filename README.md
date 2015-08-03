@@ -17,13 +17,18 @@ pizza.html
 - Added viewport tag in header
 - Inlined and minified CSS
 - Used various image sizes 
-- Minified javascript and use async
+- Minified javascript
 
-main.js
-- changed changePizzaSizes to only loop the part to update width
+
+view/js/main.js
+- changed changePizzaSizes() to only loop the part to update width
 - changed looping for pizza generator to get the first 2 pizzas outside of the loop
-- changed updatePosition to use cachedScroll and phaseCount
-- changed the number of sliding pizzas to 35
+- changed updatePosition() to use cachedScroll and separate into two loops
+- changed the number of sliding pizzas according to inner height and inner width calculation
+- Used getElementByClassName instead of querySelectorAll
+
+views/css/style.css
+- Added -webkit-backface-visibility: hidden; backface-visibility: hidden
 
 How to use PageSpeed Insights
 ----------------------------------
