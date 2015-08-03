@@ -532,16 +532,15 @@ function updatePositions() {
     for (var i = 0, max = items.length; i < max; i++) {
         items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
     }
-}
 
-// User Timing API to the rescue again. Seriously, it's worth learning.
-// Super easy to create custom metrics.
-window.performance.mark("mark_end_frame");
-window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
-if (frame % 10 === 0) {
-    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
-    logAverageFrame(timesToUpdatePosition);
-}
+    // User Timing API to the rescue again. Seriously, it's worth learning.
+    // Super easy to create custom metrics.
+    window.performance.mark("mark_end_frame");
+    window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
+    if (frame % 10 === 0) {
+        var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
+        logAverageFrame(timesToUpdatePosition);
+    }
 }
 
 // runs updatePositions on scroll
