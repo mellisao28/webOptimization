@@ -550,15 +550,13 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
     var cols = 8;
     var s = 256;
-    var pizzaHeight = 100, // sliding pizza height
-        pizzaWidth = 73.33; // sliding pizza width
-    var numOfMovingPizzas = (self.innerHeight * self.innerWidth) / (pizzaHeight * pizzaWidth); //calculate number of moving pizzas
+    var numOfMovingPizzas = self.innerHeight / s * cols; //calculate number of moving pizzas
     for (var i = 0; i < numOfMovingPizzas; i++) {
         var elem = document.createElement('img');
         elem.className = 'mover';
         elem.src = "images/pizza.png";
-        elem.style.height = pizzaHeight + "px";
-        elem.style.width = pizzaWidth + "px";
+        elem.style.height = "100px";
+        elem.style.width = "73.33px";
         elem.basicLeft = (i % cols) * s;
         elem.style.top = (Math.floor(i / cols) * s) + 'px';
         document.querySelector("#movingPizzas1").appendChild(elem);
